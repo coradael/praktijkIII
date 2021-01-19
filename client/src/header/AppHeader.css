@@ -1,0 +1,72 @@
+
+
+.ant-layout-header {
+    height: 70px;
+    padding: 0 50px;
+    line-height: 64px;
+    background: #1890FF;
+}
+
+
+.app-title {
+  float: left;
+  
+	
+  }
+  
+.app-title a {
+    text-decoration: none;
+    line-height: 80px;
+    font-size: 50px;
+  display: inline-block;
+  color: blue; 
+	
+  } 
+  
+  .app-title a:hover {
+  text-decoration: none;
+  color: whitesmoke;
+	
+  }
+  
+  .app-menu {
+    float: right;
+  }
+  .app-menu > li {
+	padding: 0 30px;
+	line-height: 70px;
+  }
+
+  .app-menu > li > a {
+    padding: 0 20px;
+    margin: 0 -20px;
+  }
+
+  .app-menu > li > a > i {
+    margin-right: 0 !important;
+  }
+
+  .profile-dropdown-menu {
+    min-width: 200px;
+  }
+
+  .profile-menu .user-full-name-info {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.85);
+  }
+  
+  .profile-menu .username-info {
+    font-size: 14px;
+    color: rgba(0,0,0,0.65);
+  }
+
+  .dropdown-item {
+    padding: 10px 20px;
+  }
+
+  .dropdown-item a {
+    padding: 10px 12px;
+    margin: -10px -12px;
+  }
+  

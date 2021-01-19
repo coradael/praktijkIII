@@ -1,68 +1,86 @@
 package com.praktijk3.config;
 
-import javax.sql.DataSource;
 
+
+import com.praktijk3.service.gebruikersDetails;
+import com.praktijk3.service.VerificatieFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+@EnableGlobalMethodSecurity(
+        securedEnabled = true,
+        jsr250Enabled = true,
+        prePostEnabled = true
+)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    gebruikersDetails gebruikersdetails;
 
- @Autowired
- private BCryptPasswordEncoder bCryptPasswordEncoder;
- 
- @Autowired
- private DataSource dataSource;
- 
- private final String USERS_QUERY = "select email, password, active from user where email=?";
- private final String ROLES_QUERY = "select u.email, r.role from user u inner join user_role ur on (u.id = ur.user_id) inner join role r on (ur.role_id=r.role_id) where u.email=?";
 
- @Override
- protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-  auth.jdbcAuthentication()
-   .usersByUsernameQuery(USERS_QUERY)
-   .authoritiesByUsernameQuery(ROLES_QUERY)
-   .dataSource(dataSource)
-   .passwordEncoder(bCryptPasswordEncoder);
- }
- 
- @Override
- protected void configure(HttpSecurity http) throws Exception{
-  http.authorizeRequests()
-   .antMatchers("/").permitAll()
-   .antMatchers("/login").permitAll()
-   .antMatchers("/signup").permitAll()
-   .antMatchers("/home/**", "/employees/**", "/team/**").hasAuthority("ADMIN").anyRequest()
-   .authenticated().and().csrf().disable()
-   .formLogin().loginPage("/login").failureUrl("/login?error=true")
-   .defaultSuccessUrl("/home/home")
-//   .defaultSuccessUrl("employee")
-   .usernameParameter("email")
-   .passwordParameter("password")
-   .and().logout()
-   .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-   .logoutSuccessUrl("/")
-   .and().rememberMe()
-   .tokenRepository(persistentTokenRepository())
-   .tokenValiditySeconds(60*60)
-   .and().exceptionHandling().accessDeniedPage("/access_denied");
- }
- 
- @Bean
- public PersistentTokenRepository persistentTokenRepository() {
-  JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-  db.setDataSource(dataSource);
-  
-  return db;
- }
+    @Bean
+    public VerificatieFilter verificatieFilter() {
+        return new VerificatieFilter();
+    }
+
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .cors()
+                    .and()
+                .csrf()
+                    .disable()
+
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                .authorizeRequests()
+                    .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js")
+                        .permitAll()
+                    .antMatchers("/api/**")
+                        .permitAll()
+                 .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
+                        .permitAll()
+                    .antMatchers(HttpMethod.GET,"/api/speler/**")
+                        .permitAll();
+
+
+       
+       http.addFilterBefore(
+       		verificatieFilter(),
+        		UsernamePasswordAuthenticationFilter.class);
+
+    }
 }
