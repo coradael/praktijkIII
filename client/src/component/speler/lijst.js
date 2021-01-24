@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ApiService from "../service/ApiService";
-import './lijst.css';
+
 
 import { Table} from 'antd';
 
