@@ -14,7 +14,7 @@ import lijstBijwerken from "./component/speler/lijstBijwerken";
 import spelerToevoegen from "./component/speler/spelerToevoegen";
 import spelerBijwerken from "./component/speler/spelerBijwerken";
 import lijst from "./component/speler/lijst";
-import hola from "./imag/Champions.jpg";
+import background1 from "./imag/Champions.jpg";
 import { Layout, notification } from 'antd';
 
 
@@ -104,7 +104,9 @@ class App extends Component {
               <Switch>      
                 <Route exact path="/" > 
                 <div className= "image">
-                <img src={hola} width="800" height="600"  display="center" />
+                <img src={background1} 
+                // width="700" height="500" 
+                 display="center" />
                 </div>
                 </Route>     
                   

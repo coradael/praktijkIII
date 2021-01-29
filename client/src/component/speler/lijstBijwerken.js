@@ -56,7 +56,7 @@ class listKunst extends Component {
                
 
         <Table dataSource={this.state.users}>
-                    <ColumnGroup className="title" title="Spelers">
+                    <ColumnGroup className="title" title="Spelers bijwerken">
                     <Column title="Id" dataIndex="id" key="id" />
                     <Column title="Naam" dataIndex="name" key="name" />
                     <Column title="Achternaam" dataIndex="achternaam" key="achternaam" />

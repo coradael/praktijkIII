@@ -84,22 +84,22 @@ class Signup extends Component {
     render() {
         return (
             <div className="signup-container">
-                <h1 className="page-title">Nieuwe account aanmaken</h1>
+                <h1 className="title">Account aanmaken</h1>
                 <div className="signup-content">
                     <Form onSubmit={this.handleSubmit} className="signup-form">
                         <FormItem 
-                            label="Volledige Naam"
+                            label="Naam"
                             validateStatus={this.state.name.validateStatus}
                             help={this.state.name.errorMsg}>
                             <Input 
                                 size="large"
                                 name="name"
                                 autoComplete="off"
-                                placeholder="uw volledige naam"
+                                placeholder="Volledige naam"
                                 value={this.state.name.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validateName)} />    
                         </FormItem>
-                        <FormItem label="Usernaam"
+                        <FormItem label="Gebruikersnaam"
                             hasFeedback
                             validateStatus={this.state.username.validateStatus}
                             help={this.state.username.errorMsg}>
@@ -107,13 +107,13 @@ class Signup extends Component {
                                 size="large"
                                 name="username" 
                                 autoComplete="off"
-                                placeholder="een unique usernaam"
+                                placeholder="Unieke gebruikersnaam"
                                 value={this.state.username.value} 
                                 onBlur={this.validateUsernameAvailability}
                                 onChange={(event) => this.handleInputChange(event, this.validateUsername)} />    
                         </FormItem>
                         <FormItem 
-                            label="Email"
+                            label="Emailadres"
                             hasFeedback
                             validateStatus={this.state.email.validateStatus}
                             help={this.state.email.errorMsg}>
@@ -122,13 +122,13 @@ class Signup extends Component {
                                 name="email" 
                                 type="email" 
                                 autoComplete="off"
-                                placeholder="uw email"
+                                placeholder="emailadres@speler-Novi.nl"
                                 value={this.state.email.value} 
                                 onBlur={this.validateEmailAvailability}
                                 onChange={(event) => this.handleInputChange(event, this.validateEmail)} />    
                         </FormItem>
                         <FormItem 
-                            label="Password"
+                            label="Wachtwoord"
                             validateStatus={this.state.password.validateStatus}
                             help={this.state.password.errorMsg}>
                             <Input 
@@ -136,7 +136,7 @@ class Signup extends Component {
                                 name="password" 
                                 type="password"
                                 autoComplete="off"
-                                placeholder="uw password tussen 6 tot 20 tekens" 
+                                placeholder="Wachtwoord tussen 6 tot 20 tekens" 
                                 value={this.state.password.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validatePassword)} />    
                         </FormItem>
@@ -146,7 +146,8 @@ class Signup extends Component {
                                 size="large" 
                                 className="signup-form-button"
                                 disabled={this.isFormInvalid()}>Aanmaken</Button>
-                            Al geregistreerd? <Link to="/login">Nu inloggen!</Link>
+                                <hr/>
+                             <Link to="/login">Nu inloggen!</Link>
                         </FormItem>
                     </Form>
                 </div>

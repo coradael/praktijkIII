@@ -8,7 +8,7 @@ import soccer from '../imag/Soccer1.png';
 import refresh from '../imag/Refresh.png';
 import list from '../imag/List.png';
 import User1 from '../imag/User1.png';
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import { Layout, Menu, Dropdown } from 'antd';
 const Header = Layout.Header;
     
 class AppHeader extends Component {
@@ -55,7 +55,7 @@ class AppHeader extends Component {
         } else {
           menuItems = [
             <Menu.Item key="/login">
-              <Link to="/login">Inloggen</Link>
+              <Link  to="/login">Inloggen</Link>
             </Menu.Item>,
             <Menu.Item key="/signup">
               <Link to="/signup">Registreren</Link>
