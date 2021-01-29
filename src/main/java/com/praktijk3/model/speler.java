@@ -31,10 +31,6 @@ public class speler {
 		private int nummer;
 		
 
-    
-
-
-		
 
 	    public speler() {
 			super();
@@ -51,7 +47,6 @@ public class speler {
 		}
 
 		
-
 
 		public int getId() {
 			return id;
@@ -93,7 +88,6 @@ public class speler {
 			this.nummer = nummer;
 		}
 		
-
 		
 		@Override
 	    public boolean equals(Object o) {
@@ -114,7 +108,5 @@ public class speler {
 					+ ", nummer=" + nummer +  "]";
 		}
 
-		
-		
 	    
 	}
