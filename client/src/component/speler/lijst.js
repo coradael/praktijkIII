@@ -6,7 +6,6 @@ import { Table} from 'antd';
 
 const { Column, ColumnGroup} = Table
 
-
 class lijst extends Component {
 
     constructor(props) {

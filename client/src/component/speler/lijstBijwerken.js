@@ -52,8 +52,7 @@ class listKunst extends Component {
     render() {
         return (
             <div>
-                
-               
+                      
 
         <Table dataSource={this.state.users}>
                     <ColumnGroup className="title" title="Spelers bijwerken">
@@ -80,8 +79,6 @@ class listKunst extends Component {
             
         </Table>
        
-
-
             </div>
         );
     }
