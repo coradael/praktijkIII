@@ -4,7 +4,7 @@ import ApiService from "../service/ApiService";
 import { Table, Button } from 'antd';
 
 const { Column, ColumnGroup } = Table
-
+//hola Marinda
 class listKunst extends Component {
 
     constructor(props) {
